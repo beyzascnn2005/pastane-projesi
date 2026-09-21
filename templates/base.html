@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block baslik %}Dondurmacı Abdülkerim{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+       :root {
+    --cream: #fdfbf7;
+    --cream-alt: #f5eedf;
+    --espresso: #2d261e;
+    --espresso-soft: #706558;
+    --copper: #b87333;
+    --copper-dark: #985b24;
+    --pine: #425946;
+    --gold: #d4a34b;
+    --border-soft: rgba(45, 38, 30, 0.12);
+    --radius: 6px;
+}
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--cream);
+            color: var(--espresso);
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1.02rem;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Fraunces', serif;
+            color: var(--espresso);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        a { color: var(--copper); }
+        a:hover { color: var(--copper-dark); }
+
+        .text-muted { color: var(--espresso-soft) !important; }
+        
+
+        /* ---- Navbar ---- */
+        .navbar {
+            background-color: #fffdf9 !important;
+            border-bottom: 1px solid var(--gold);
+            box-shadow: none !important;
+            padding-top: 0.9rem;
+            padding-bottom: 0.9rem;
+        }
+        .navbar-brand { padding: 0; margin: 0; }
+        .brand-lockup {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+        .brand-cone { width: 34px; height: 34px; flex-shrink: 0; }
+        .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .brand-text-1 {
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+            color: var(--espresso);
+        }
+        .brand-text-2-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1px;
+        }
+        .brand-text-2-row .line {
+            width: 12px;
+            height: 1px;
+            background-color: var(--gold);
+            flex-shrink: 0;
+        }
+        .brand-text-2 {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--copper);
+            white-space: nowrap;
+        }
+        .navbar .nav-link {
+            color: var(--espresso-soft);
+            font-weight: 500;
+            margin: 0 0.35rem;
+        }
+        .navbar .nav-link:hover { color: var(--copper); }
+
+        /* ---- Buttons ---- */
+        .btn { border-radius: var(--radius); font-weight: 600; }
+        .btn-tatli {
+            background-color: var(--copper);
+            border-color: var(--copper);
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            transition: background-color 0.15s ease, transform 0.15s ease;
+        }
+        .btn-tatli:hover {
+            background-color: var(--copper-dark);
+            border-color: var(--copper-dark);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .btn-outline-secondary {
+            color: var(--espresso-soft);
+            border-color: var(--border-soft);
+        }
+        .btn-outline-secondary:hover, .btn-outline-secondary.active {
+            background-color: var(--pine);
+            border-color: var(--pine);
+            color: #fff;
+        }
+        .btn-outline-danger { border-radius: var(--radius); }
+
+        /* ---- Cards ---- */
+        .card {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        overflow: hidden;
+        }
+        .card:hover {
+         transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(26, 20, 18, 0.08) !important;
+        }
+
+        /* Kart içindeki dondurma fotoğrafları için */
+        .card-img-top {
+        transition: transform 0.4s ease;
+        }
+        .card:hover .card-img-top {
+        transform: scale(1.04);
+        }
+        .shadow-sm { box-shadow: 0 1px 3px rgba(43, 31, 22, 0.07) !important; }
+        .card-title { font-family: 'Fraunces', serif; font-weight: 600; }
+
+        /* ---- Badges ---- */
+        .badge.bg-secondary { background-color: var(--pine) !important; }
+        .badge.bg-success { background-color: var(--pine) !important; }
+        .badge.bg-warning { background-color: var(--gold) !important; color: var(--espresso) !important; }
+
+        /* ---- Forms ---- */
+        .form-control, .form-select {
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius);
+            background-color: #fffdf9;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--copper);
+            box-shadow: 0 0 0 0.2rem rgba(190, 91, 46, 0.15);
+        }
+        .form-label { font-weight: 600; color: var(--espresso); font-size: 0.92rem; }
+
+        /* ---- Tables ---- */
+        .table thead { background-color: var(--cream-alt); }
+        .table thead th {
+            border-bottom: 2px solid var(--gold);
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--espresso);
+        }
+        .table td, .table th { border-color: var(--border-soft); vertical-align: middle; }
+
+        /* ---- Alerts ---- */
+        .alert { border-radius: var(--radius); border: 1px solid transparent; }
+        .alert-success { background-color: #eaf0e8; color: var(--pine); border-color: rgba(38,64,46,0.2); }
+
+        /* ---- Footer ---- */
+        footer {
+            background-color: var(--espresso);
+            color: #ece3d6;
+            padding: 3rem 0 1.5rem;
+            margin-top: 5rem;
+            border-top: 3px solid var(--gold);
+        }
+        footer h6 {
+            color: #fff;
+            font-family: 'Fraunces', serif;
+            font-size: 1.05rem;
+            margin-bottom: 0.9rem;
+        }
+        footer a { color: #d8c9b3; text-decoration: none; }
+        footer a:hover { color: #fff; }
+        footer .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.12);
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            color: #b4a691;
+            font-size: 0.88rem;
+        }
+
+        /* ---- Utility ---- */
+        .divider-gold {
+            width: 60px;
+            height: 2px;
+            background-color: var(--gold);
+            margin: 0.75rem auto 1.5rem;
+        }
+        .divider-gold.align-start { margin-left: 0; }
+        .category-art { width: 110px; height: 110px; }
+        .text-copper { color: var(--copper) !important; }
+        .text-pine { color: var(--pine) !important; }
+        .bg-cream-alt { background-color: var(--cream-alt) !important; }
+
+        .top-bar {
+            background-color: var(--espresso);
+            color: #dfd5c6;
+            font-size: 0.82rem;
+            letter-spacing: 0.03em;
+        }
+        .text-gold { 
+            color: var(--gold) !important; 
+        }
+        .navbar-greet-badge {
+            background-color: var(--cream-alt);
+            color: var(--espresso-soft);
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            white-space: nowrap;
+            align-items: center;
+        }
+    </style>
+    {% block ekstra_head %}{% endblock %}
+</head>
+<body>
+    <div class="top-bar text-center py-1 small">
+        <span>🍦 Günlük Taze Keçi Sütüyle Hazırlanır</span>
+        <span class="mx-2">•</span>
+        <span>Ilıca / Erzurum</span>
+        <span class="mx-2">•</span>
+        <a href="/urunler-sayfasi" class="text-decoration-underline text-gold">Ürünleri İncele</a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <a class="navbar-brand" href="/">
+                    <span class="brand-lockup">
+                        <svg class="brand-cone" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 3c-6.5 0-11 4.3-11 9.6 0 1.4.3 2.7 1 3.9L12 18c1.4-4.3 4.3-7 8-7s6.6 2.7 8 7l2-1.5c.7-1.2 1-2.5 1-3.9C31 7.3 26.5 3 20 3z" fill="#f4e8cf" stroke="#c9863f" stroke-width="0.6"/>
+                            <path d="M20 6.2c-4.9 0-8.6 2.9-9.6 6.9.5 1 1.3 1.9 2.3 2.5.6-3.7 3.5-6.4 7.3-6.4s6.7 2.7 7.3 6.4c1-.6 1.8-1.5 2.3-2.5-1-4-4.7-6.9-9.6-6.9z" fill="#e0a53e"/>
+                            <path d="M12.5 19h15L21 34.5c-.5 1.3-2.5 1.3-3 0L12.5 19z" fill="#c9863f"/>
+                            <path d="M13.6 22.5h12.8M14.7 26.5h10.6M15.8 30.5h8.4" stroke="#8a5a22" stroke-width="0.8" opacity="0.6"/>
+                        </svg>
+                        <span class="brand-text">
+                            <span class="brand-text-1">Dondurmacı</span>
+                            <span class="brand-text-2-row">
+                                <span class="line"></span>
+                                <span class="brand-text-2">Abdülkerim</span>
+                                <span class="line"></span>
+                            </span>
+                        </span>
+                    </span>
+                </a>
+                {% if current_kullanici %}
+                <span class="navbar-greet-badge d-none d-sm-inline-flex">Merhaba, {{ current_kullanici.ad_soyad }}</span>
+                {% endif %}
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                {% if current_kullanici %}
+                <span class="navbar-greet-badge d-inline-flex d-sm-none mb-2">Merhaba, {{ current_kullanici.ad_soyad }}</span>
+                {% endif %}
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Ana Sayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/urunler-sayfasi">Ürünlerimiz</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/iletisim">İletişim</a></li>
+                    {% if current_kullanici %}
+                    <li class="nav-item"><a class="nav-link" href="/siparislerim">Siparişlerim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/favorilerim">Favorilerim</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav align-items-lg-center">
+                    {% if current_kullanici %}
+                        {% if current_kullanici.is_admin %}
+                            <li class="nav-item"><a class="nav-link" href="/admin">Admin Paneli</a></li>
+                        {% endif %}
+                        <li class="nav-item"><a class="nav-link" href="/cikis">Çıkış Yap</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/giris-sayfasi">Giriş Yap</a></li>
+                        <li class="nav-item"><a class="btn btn-tatli btn-sm ms-lg-2" href="/kayit-sayfasi">Kayıt Ol</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        {% block icerik %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h6>Dondurmacı Abdülkerim</h6>
+                    <p class="mb-0">Dondurma, pasta ve geleneksel tatlılar — <span style="white-space:nowrap;">Ilıca / Erzurum</span>.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>İletişim</h6>
+                    <p class="mb-1"><i class="bi bi-geo-alt-fill me-1"></i> Ilıca / Erzurum</p>
+                    <p class="mb-1"><i class="bi bi-telephone-fill me-1"></i> 0530 370 9793</p>
+                    <p class="mb-0"><i class="bi bi-clock-fill me-1"></i> Her gün 10:00 - 00:00</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>Bizi Takip Edin</h6>
+                    <a href="https://www.instagram.com/dondurmaciabdulkerim/" class="me-3"><i class="bi bi-instagram fs-5"></i></a>
+                    <a href="https://wa.me/905303709793"><i class="bi bi-whatsapp fs-5"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                2026 Dondurmacı Abdülkerim. Tüm hakları saklıdır.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

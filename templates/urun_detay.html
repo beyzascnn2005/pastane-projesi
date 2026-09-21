@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block baslik %}{{ urun.isim }} - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<div class="row">
+    <div class="col-md-5 mb-4">
+        {% if urun.fotograf_url %}
+            <img src="{{ urun.fotograf_url }}" class="img-fluid rounded shadow-sm" alt="{{ urun.isim }}">
+        {% else %}
+            <div class="bg-cream-alt rounded d-flex align-items-center justify-content-center" style="height:300px;">
+                <i class="bi bi-cake2" style="font-size:5rem;color:var(--gold);"></i>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-7">
+        <span class="badge bg-secondary mb-2">{{ urun.kategori }}</span>
+        <h2>{{ urun.isim }}</h2>
+        <p class="text-muted">{{ urun.aciklama or "" }}</p>
+        <h4 class="text-copper">{{ "%.2f"|format(urun.fiyat) }} TL</h4>
+
+        <div class="d-flex align-items-center gap-4 my-3">
+            <div>
+                {% if ortalama_puan %}
+                    <span class="text-warning fs-5">
+                        {% for i in range(1,6) %}
+                            {% if i <= ortalama_puan %}★{% else %}☆{% endif %}
+                        {% endfor %}
+                    </span>
+                    <span class="text-muted">({{ ortalama_puan }} / 5, {{ yorumlar|length }} yorum)</span>
+                {% else %}
+                    <span class="text-muted">Henüz puan verilmemiş</span>
+                {% endif %}
+            </div>
+            <div>
+                <!-- Beğeni butonu: bir form, tek butonluk. Tıklanınca
+                     doğrudan /urun-detay/{id}/begen adresine POST atar. -->
+                <form method="post" action="/urun-detay/{{ urun.id }}/begen" class="d-inline">
+                    <button type="submit" class="btn btn-sm {% if kullanici_begendi_mi %}btn-danger{% else %}btn-outline-danger{% endif %}">
+                        <i class="bi bi-heart-fill"></i>
+                        {{ begeni_sayisi }} {% if kullanici_begendi_mi %}Beğenildi{% else %}Beğen{% endif %}
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        {% if not current_kullanici %}
+        <p class="text-muted small">
+            <i class="bi bi-info-circle"></i>
+            Yorum yapmak ve beğenmek için <a href="/giris-sayfasi">giriş yapmalısın</a>.
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+<hr class="my-5" style="border-color:var(--border-soft);">
+
+{% if current_kullanici %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Yorum Yap</h5>
+        <form method="post" action="/urun-detay/{{ urun.id }}/yorum-ekle">
+            <div class="mb-3">
+                <label class="form-label">Puanın (1-5)</label>
+                <select name="puan" class="form-select" style="max-width:120px;" required>
+                    <option value="5">5 - Mükemmel</option>
+                    <option value="4">4 - Çok İyi</option>
+                    <option value="3">3 - İyi</option>
+                    <option value="2">2 - Orta</option>
+                    <option value="1">1 - Kötü</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Yorumun</label>
+                <textarea name="metin" class="form-control" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-tatli">Yorumu Gönder</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<h4 class="mb-4">Yorumlar ({{ yorumlar|length }})</h4>
+
+{% if yorumlar %}
+    {% for yorum in yorumlar %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <strong>{{ yorum.kullanici_adi }}</strong>
+                <span class="text-warning">
+                    {% for i in range(1,6) %}
+                        {% if i <= yorum.puan %}★{% else %}☆{% endif %}
+                    {% endfor %}
+                </span>
+            </div>
+            <p class="mb-1 mt-2">{{ yorum.metin }}</p>
+            <small class="text-muted">{{ yorum.tarih.strftime("%d.%m.%Y %H:%M") }}</small>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <p class="text-muted">Bu ürüne henüz yorum yapılmamış. İlk yorumu sen yap!</p>
+{% endif %}
+
+<a href="/urunler-sayfasi" class="btn btn-outline-secondary mt-4">← Tüm Ürünlere Dön</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block baslik %}Giriş Yap - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <h3 class="mb-4 text-center">Giriş Yap</h3>
+
+                {% if hata %}
+                    <div class="alert alert-danger">{{ hata }}</div>
+                {% endif %}
+
+                <!-- Bu form, tarayıcının doğrudan /giris-sayfasi adresine
+                     POST isteği atmasını sağlıyor - JavaScript'e gerek yok. -->
+                <form method="post" action="/giris-sayfasi">
+                    <div class="mb-3">
+                        <label class="form-label">E-posta</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Şifre</label>
+                        <input type="password" name="sifre" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-tatli w-100">Giriş Yap</button>
+                </form>
+
+                <p class="text-center text-muted mt-4 mb-0">
+                    Hesabın yok mu? <a href="/kayit-sayfasi">Kayıt Ol</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

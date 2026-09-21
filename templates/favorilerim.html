@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block baslik %}Favorilerim - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<div class="text-center mb-4">
+    <h2>Favorilerim</h2>
+    <div class="divider-gold"></div>
+</div>
+
+{% if urunler %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for urun in urunler %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            {% if urun.fotograf_url %}
+                <img src="{{ urun.fotograf_url }}" class="card-img-top" alt="{{ urun.isim }}" style="height:200px;object-fit:cover;">
+            {% else %}
+                <div class="bg-cream-alt d-flex align-items-center justify-content-center" style="height:200px;">
+                    <i class="bi bi-heart-fill" style="font-size:3rem;color:var(--copper);"></i>
+                </div>
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+                <span class="badge bg-secondary mb-2" style="width:fit-content;">{{ urun.kategori }}</span>
+                <h5 class="card-title">{{ urun.isim }}</h5>
+                <p class="card-text text-muted small">{{ urun.aciklama or "" }}</p>
+                <div class="mt-auto">
+                    <strong class="text-copper">{{ "%.2f"|format(urun.fiyat) }} TL</strong>
+                </div>
+                <a href="/urun-detay/{{ urun.id }}" class="btn btn-tatli btn-sm mt-3">Detaya Git</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-center text-muted">Henüz hiçbir ürünü beğenmedin. <a href="/urunler-sayfasi">Ürünlere göz at</a> ve favorilerini oluştur!</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block baslik %}Ana Sayfa - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<!-- HERO BÖLÜMÜ -->
+<div class="hero-box p-4 p-md-5 rounded-4 mb-5 position-relative overflow-hidden">
+    <div class="row align-items-center gy-4">
+        <div class="col-lg-7 text-center text-lg-start">
+            <span class="hero-badge mb-3 d-inline-flex align-items-center gap-2">
+                <i class="bi bi-stars"></i> %100 Hakiki Keçi Sütü & Doğal Salep
+            </span>
+            <h1 class="display-4 fw-bold mb-3" style="line-height: 1.15;">
+                Ev Yapımı Dondurma,<br>
+                <span class="hero-gold-text">Pasta & Geleneksel Tatlılar</span>
+            </h1>
+            <p class="lead text-muted mb-4" style="max-width: 42ch;">
+                Palandöken eteklerinin eşsiz lezzet geleneği. Her gün taze hazırlanan, asırlık reçeteli el yapımı tatlar kapınızda.
+            </p>
+            <div class="d-flex gap-3 flex-wrap justify-content-center justify-content-lg-start">
+                <a href="/urunler-sayfasi" class="btn btn-tatli btn-lg px-4 shadow-sm">
+                    <i class="bi bi-bag-check-fill me-2"></i>Ürünlerimize Göz Atın
+                </a>
+                <a href="/iletisim" class="btn btn-outline-secondary btn-lg px-4">
+                    <i class="bi bi-geo-alt-fill me-2 text-copper"></i>Bize Ulaşın
+                </a>
+            </div>
+
+            <!-- Sayısal Güven Rozetleri -->
+            <div class="row mt-5 pt-3 border-top g-3" style="border-color: var(--border-soft) !important;">
+                <div class="col-4">
+                    <h4 class="fw-bold mb-0 text-espresso font-display">Taze</h4>
+                    <small class="text-muted">Günlük Üretim</small>
+                </div>
+                <div class="col-4">
+                    <h4 class="fw-bold mb-0 text-espresso font-display">%100</h4>
+                    <small class="text-muted">Doğal Malzeme</small>
+                </div>
+                <div class="col-4">
+                    <h4 class="fw-bold mb-0 text-espresso font-display">Ilıca</h4>
+                    <small class="text-muted">Erzurum Lezzeti</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5 text-center position-relative">
+            <div class="hero-fade-frame mx-auto shadow-lg">
+    <img src="/static/gorseller/dukkan_1.jpg" class="hero-fade-img" alt="Dükkanımız">
+    <img src="/static/gorseller/dukkan_2.jpg" class="hero-fade-img" alt="Baklavalarımız">
+    <img src="/static/gorseller/dukkan_3.jpg" class="hero-fade-img" alt="Baklavalarımız">
+    <img src="/static/gorseller/dukkan_4.jpg" class="hero-fade-img" alt="Dükkanımız">
+    <img src="/static/gorseller/dukkan_5.jpg" class="hero-fade-img" alt="Dükkanımız">
+</div>
+        </div>
+    </div>
+</div>
+
+<!-- ÖNE ÇIKAN ÖZELLİKLER (BANNER) -->
+<div class="row g-3 text-center mb-5">
+    <div class="col-md-4">
+        <div class="feature-strip p-3 rounded-3 h-100 d-flex align-items-center justify-content-center gap-3">
+            <i class="bi bi-shield-check fs-2 text-copper"></i>
+            <div class="text-start">
+                <h6 class="mb-0 fw-bold">Katkısız & Doğal</h6>
+                <small class="text-muted">Koruyucu ve glikoz içermez</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-strip p-3 rounded-3 h-100 d-flex align-items-center justify-content-center gap-3">
+            <i class="bi bi-snow2 fs-2 text-copper"></i>
+            <div class="text-start">
+                <h6 class="mb-0 fw-bold">Soğuk Zincir Teslimat</h6>
+                <small class="text-muted">Erimeden ilk anki tazelikte</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-strip p-3 rounded-3 h-100 d-flex align-items-center justify-content-center gap-3">
+            <i class="bi bi-heart-fill fs-2 text-copper"></i>
+            <div class="text-start">
+                <h6 class="mb-0 fw-bold">Özel Gün Pastaları</h6>
+                <small class="text-muted">İsteğe özel butik tasarım</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NELER SUNUYORUZ BAŞLIK -->
+<div class="text-center my-5">
+    <span class="text-copper fw-semibold text-uppercase tracking-wide small">Özel Reçetelerimiz</span>
+    <h2 class="display-6 fw-bold mt-1">Neler Sunuyoruz</h2>
+    <div class="divider-gold"></div>
+</div>
+
+<!-- KARTLAR -->
+<div class="row text-center g-4">
+    <!-- Dondurma -->
+    <div class="col-md-4">
+        <div class="card showcase-card h-100">
+            <div class="card-body py-5 px-4 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="img-marquee mb-4">
+                        <div class="img-marquee-track">
+                            <img src="/static/gorseller/dondurma_1.jpg" alt="Portakallı Dondurma">
+                            <img src="/static/gorseller/dondurma_2.jpg" alt="Çilekli Dondurma">
+                            <img src="/static/gorseller/dondurma_3.jpg" alt="Çikolatalı Dondurma">
+                            <img src="/static/gorseller/dondurma_4.jpg" alt="Sade Dondurma">
+                            <!-- Kesintisiz döngü için görseller tekrar ediliyor -->
+                            <img src="/static/gorseller/dondurma_1.jpg" alt="Portakallı Dondurma">
+                            <img src="/static/gorseller/dondurma_2.jpg" alt="Çilekli Dondurma">
+                            <img src="/static/gorseller/dondurma_3.jpg" alt="Çikolatalı Dondurma">
+                            <img src="/static/gorseller/dondurma_4.jpg" alt="Sade Dondurma">
+                        </div>
+                    </div>
+                    <h4 class="card-title mb-2">Dondurma</h4>
+                    <p class="card-text text-muted">El yapımı, saf keçi sütü ve salep ile hazırlanan lezzet çeşitlerimiz.</p>
+                </div>
+                <div class="mt-4">
+                    <a href="/urunler-sayfasi?kategori=Dondurma" class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Çeşitleri İncele →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pasta -->
+    <div class="col-md-4">
+        <div class="card showcase-card h-100">
+            <div class="card-body py-5 px-4 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="img-marquee mb-4">
+                        <div class="img-marquee-track marquee-down">
+                            <img src="/static/gorseller/pasta_1.jpg" alt="Çikolatalı Pasta">
+                            <img src="/static/gorseller/pasta_2.jpg" alt="Çilekli Doğum Günü Pastası">
+                            <img src="/static/gorseller/pasta_3.jpg" alt="Profiterollü Pasta">
+                            <!-- Kesintisiz döngü için görseller tekrar ediliyor -->
+                            <img src="/static/gorseller/pasta_1.jpg" alt="Çikolatalı Pasta">
+                            <img src="/static/gorseller/pasta_2.jpg" alt="Çilekli Doğum Günü Pastası">
+                            <img src="/static/gorseller/pasta_3.jpg" alt="Profiterollü Pasta">
+                        </div>
+                    </div>
+                    <h4 class="card-title mb-2">Pasta</h4>
+                    <p class="card-text text-muted">Doğum günü, kutlama ve en özel günleriniz için taze çikolata ve meyvelerle butik tasarım pastalar.</p>
+                </div>
+                <div class="mt-4">
+                    <a href="/siparis-ver" class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Sipariş Oluştur →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Baklava & Kadayıf -->
+    <div class="col-md-4">
+        <div class="card showcase-card h-100">
+            <div class="card-body py-5 px-4 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="img-marquee mb-4">
+                        <div class="img-marquee-track">
+                            <img src="/static/gorseller/baklava_1.jpg" alt="Baklava">
+                            <img src="/static/gorseller/baklava_2.jpg" alt="Baklava">
+                            <img src="/static/gorseller/baklava_3.jpg" alt="Kadayıf">
+                            <img src="/static/gorseller/baklava_4.jpg" alt="Şerbetli Tatlı">
+                            <!-- Kesintisiz döngü için görseller tekrar ediliyor -->
+                            <img src="/static/gorseller/baklava_1.jpg" alt="Baklava">
+                            <img src="/static/gorseller/baklava_2.jpg" alt="Baklava">
+                            <img src="/static/gorseller/baklava_3.jpg" alt="Kadayıf">
+                            <img src="/static/gorseller/baklava_4.jpg" alt="Şerbetli Tatlı">
+                        </div>
+                    </div>
+                    <h4 class="card-title mb-2">Baklava & Kadayıf</h4>
+                    <p class="card-text text-muted">Erzurum’un çıtır kadayıf dolması ve bol cevizli, tereyağlı geleneksel şerbetli tatlıları.</p>
+                </div>
+                <div class="mt-4">
+                    <a href="/urunler-sayfasi?kategori=Baklava" class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Tatlıları Gör →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Alanı */
+    .hero-box {
+        background: radial-gradient(circle at top right, #fffaf3 0%, var(--cream-alt) 100%);
+        border: 1px solid var(--border-soft);
+        box-shadow: 0 10px 30px rgba(45, 38, 30, 0.03);
+    }
+    .hero-badge {
+        background-color: rgba(184, 115, 51, 0.12);
+        color: var(--copper);
+        font-size: 0.82rem;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 30px;
+        letter-spacing: 0.04em;
+    }
+    .hero-gold-text {
+        color: var(--copper);
+    }
+    .hero-visual-frame {
+        width: 250px;
+        height: 250px;
+        background: #fffdf9;
+        border: 4px solid var(--cream);
+    }
+    .hero-center-icon {
+        font-size: 8.5rem;
+        color: var(--gold);
+        opacity: 0.85;
+    }
+    
+    /* 3'lü Özellik Şeridi */
+    .feature-strip {
+        background-color: #fffdf9;
+        border: 1px solid var(--border-soft);
+        transition: transform 0.2s ease;
+    }
+    .feature-strip:hover {
+        transform: translateY(-3px);
+        border-color: var(--gold);
+    }
+
+    /* Kart Animasyonları */
+    .showcase-card {
+        border-radius: var(--radius);
+        transition: all 0.3s ease;
+    }
+    .showcase-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--gold);
+        box-shadow: 0 16px 30px rgba(45, 38, 30, 0.08) !important;
+    }
+    .art-wrapper {
+        transition: transform 0.3s ease;
+    }
+    .showcase-card:hover .art-wrapper {
+        transform: scale(1.08);
+    }
+
+    /* Kartlarda akan görsel şeridi */
+    .img-marquee {
+        height: 260px;
+        overflow: hidden;
+        border-radius: var(--radius);
+        position: relative;
+    }
+    .img-marquee::before, .img-marquee::after {
+        content: "";
+        position: absolute;
+        left: 0; right: 0;
+        height: 32px;
+        z-index: 2;
+        pointer-events: none;
+    }
+    .img-marquee::before {
+        top: 0;
+        background: linear-gradient(to bottom, #fffdf9, transparent);
+    }
+    .img-marquee::after {
+        bottom: 0;
+        background: linear-gradient(to top, #fffdf9, transparent);
+    }
+    .img-marquee-track {
+        display: flex;
+        flex-direction: column;
+        animation: marquee-up 22s linear infinite;
+    }
+    .img-marquee-track.marquee-down {
+        animation-name: marquee-down;
+    }
+    .img-marquee-track img {
+        width: 100%;
+        height: 130px;
+        object-fit: cover;
+        display: block;
+    }
+    /* Görsel şeridi kart hover'ında da akmaya devam eder */
+    @keyframes marquee-up {
+        from { transform: translateY(0); }
+        to { transform: translateY(-50%); }
+    }
+    @keyframes marquee-down {
+        from { transform: translateY(-50%); }
+        to { transform: translateY(0); }
+    }
+    .hero-fade-frame {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 3 / 4;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fffdf9;
+    border: 4px solid var(--cream);
+}
+.hero-fade-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: heroFade 16s infinite;
+}
+.hero-fade-img:nth-child(1) { animation-delay: 0s; }
+.hero-fade-img:nth-child(2) { animation-delay: 4s; }
+.hero-fade-img:nth-child(3) { animation-delay: 8s; }
+.hero-fade-img:nth-child(4) { animation-delay: 12s; }
+.hero-fade-img:nth-child(5) { animation-delay: 16s; }
+
+@keyframes heroFade {
+    0%     { opacity: 0; }
+    6.25%  { opacity: 1; }
+    25%    { opacity: 1; }
+    31.25% { opacity: 0; }
+    100%   { opacity: 0; }
+}
+</style>
+{% endblock %}

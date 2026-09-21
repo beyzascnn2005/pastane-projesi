@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+
+{% block baslik %}Admin Paneli - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Admin Paneli</h2>
+    <button id="bildirimButonu" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-bell"></i> Bildirimleri Aç
+    </button>
+</div>
+
+<!-- İSTATİSTİK KARTLARI -->
+<div class="row mb-5 g-3">
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h3 class="text-copper">{{ toplam_urun }}</h3>
+                <p class="text-muted mb-0">Toplam Ürün</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h3 class="text-copper">{{ toplam_kullanici }}</h3>
+                <p class="text-muted mb-0">Kayıtlı Kullanıcı</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h3 class="text-copper">{{ toplam_yorum }}</h3>
+                <p class="text-muted mb-0">Toplam Yorum</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if mesaj %}
+<div class="alert alert-success">{{ mesaj }}</div>
+{% endif %}
+{% if hata %}
+<div class="alert alert-danger">{{ hata }}</div>
+{% endif %}
+
+<!-- KAMPANYA MAİLİ GÖNDERME -->
+<div class="card mb-5 shadow-sm">
+    <div class="card-header bg-cream-alt">
+        <i class="bi bi-envelope"></i> Kampanya/Duyuru Maili Gönder
+        <span class="text-muted small">({{ toplam_abone }} kişi aboneliğe kayıtlı)</span>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/admin/kampanya-gonder">
+            <div class="mb-3">
+                <label class="form-label">Konu</label>
+                <input type="text" name="konu" class="form-control" placeholder="Örn: Yeni geldi: Fıstıklı Profiterol!" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mesaj</label>
+                <textarea name="mesaj" class="form-control" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-tatli">Tüm Abonelere Gönder</button>
+        </form>
+    </div>
+</div>
+
+<!-- YENİ ÜRÜN EKLEME FORMU -->
+<div class="card mb-5 shadow-sm">
+    <div class="card-header bg-cream-alt">Yeni Ürün Ekle</div>
+    <div class="card-body">
+        <form method="post" action="/admin/urun-ekle" class="row g-3" enctype="multipart/form-data">
+            <div class="col-md-6">
+                <label class="form-label">Ürün Adı</label>
+                <input type="text" name="isim" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Kategori</label>
+                <select name="kategori" class="form-select" required>
+                    {% for kategori in kategoriler %}
+                        <option value="{{ kategori }}">{{ kategori }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Fiyat (TL)</label>
+                <input type="number" step="0.01" name="fiyat" class="form-control" required>
+            </div>
+            <div class="col-md-8">
+                <label class="form-label">Ürün Fotoğrafı (opsiyonel)</label>
+                <input type="file" name="fotograf" class="form-control" accept="image/*">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Açıklama</label>
+                <textarea name="aciklama" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input type="checkbox" name="stokta_var" class="form-check-input" value="true" checked>
+                    <label class="form-check-label">Stokta var</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-tatli">Ürünü Ekle</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ÜRÜN LİSTESİ (DÜZENLE / SİL) -->
+<h4 class="mb-3">Mevcut Ürünler</h4>
+<div class="table-responsive mb-5">
+    <table class="table table-hover align-middle shadow-sm" style="background:#fffdf9;">
+        <thead>
+            <tr>
+                <th>Ürün</th>
+                <th>Kategori</th>
+                <th>Fiyat</th>
+                <th>Stok</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for urun in urunler %}
+            <tr>
+                <td>{{ urun.isim }}</td>
+                <td><span class="badge bg-secondary">{{ urun.kategori }}</span></td>
+                <td>{{ "%.2f"|format(urun.fiyat) }} TL</td>
+                <td>
+    <form method="post" action="/admin/urun-stok-degistir/{{ urun.id }}">
+        <button type="submit" class="btn btn-sm {% if urun.stokta_var %}btn-success{% else %}btn-danger{% endif %}">
+            {% if urun.stokta_var %}Var{% else %}Yok{% endif %}
+        </button>
+    </form>
+</td>
+                <td>
+                    <form method="post" action="/admin/urun-sil/{{ urun.id }}" class="d-inline"
+                          onsubmit="return confirm('Bu ürünü silmek istediğine emin misin?');">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- GELEN İLETİŞİM MESAJLARI -->
+<h4 class="mb-3">Gelen Mesajlar</h4>
+{% if mesajlar %}
+<div class="table-responsive mb-5">
+    <table class="table table-hover align-middle shadow-sm" style="background:#fffdf9;">
+        <thead>
+            <tr>
+                <th>Gönderen</th>
+                <th>E-posta</th>
+                <th>Mesaj</th>
+                <th>Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in mesajlar %}
+            <tr>
+                <td>{{ m.ad_soyad }}</td>
+                <td>{{ m.email }}</td>
+                <td>{{ m.mesaj }}</td>
+                <td>{{ m.tarih.strftime("%d.%m.%Y %H:%M") }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="text-muted">Henüz mesaj yok.</p>
+{% endif %}
+
+<!-- ÖZEL SİPARİŞLER -->
+<h4 class="mb-3">Özel Siparişler</h4>
+{% if siparisler %}
+<div class="table-responsive">
+    <table class="table table-hover align-middle shadow-sm" style="background:#fffdf9;">
+        <thead>
+            <tr>
+                <th>Müşteri</th>
+                <th>Ürün</th>
+                <th>Miktar</th>
+                <th>İstenilen Tarih</th>
+                <th>Not</th>
+                <th>Durum</th>
+                <th>Güncelle</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in siparisler %}
+            <tr>
+                <td>{{ s.kullanici_adi }}</td>
+                <td>{{ s.urun_adi }}</td>
+                <td>{{ s.miktar }}</td>
+                <td>{{ s.istenilen_tarih }}</td>
+                <td>{{ s.not_metni or "-" }}</td>
+                <td>
+                    {% if s.durum == "Alindi" %}
+                        <span class="badge bg-secondary">Alındı</span>
+                    {% elif s.durum == "Hazirlaniyor" %}
+                        <span class="badge bg-warning">Hazırlanıyor</span>
+                    {% else %}
+                        <span class="badge bg-success">Teslim Alındı</span>
+                    {% endif %}
+                </td>
+                                <td>
+                    <form method="post" action="/admin/siparis-durum-guncelle/{{ s.id }}" class="d-flex gap-2 mb-1">
+                        <select name="yeni_durum" class="form-select form-select-sm">
+                            {% for durum in durum_secenekleri %}
+                                <option value="{{ durum }}" {% if durum == s.durum %}selected{% endif %}>{{ durum }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-tatli">Güncelle</button>
+                    </form>
+                    {% if s.durum == "Teslim Alindi" %}
+                    <form method="post" action="/admin/siparis-sil/{{ s.id }}"
+                          onsubmit="return confirm('Bu siparişi silmek istediğine emin misin?');">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Sil</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="text-muted">Henüz sipariş yok.</p>
+{% endif %}
+
+<script>
+// Bu script, "Bildirimleri Aç" butonuna basıldığında:
+// 1. Tarayıcıdan bildirim izni ister
+// 2. Service worker'ı (sw.js) kaydeder
+// 3. Sunucudan aldığı public key ile bir abonelik oluşturur
+// 4. Bu aboneliği sunucuya (/push-abone-ol) gönderip kaydeder
+
+function urlBase64ToUint8Array(base64String) {
+    // Tarayıcının istediği format ile bizim string halimiz farklı,
+    // bu fonksiyon aradaki dönüşümü yapıyor - standart bir yardımcı kod.
+    const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+    const rawData = window.atob(base64);
+    return Uint8Array.from([...rawData].map((c) => c.charCodeAt(0)));
+}
+
+document.getElementById("bildirimButonu").addEventListener("click", async () => {
+    try {
+        const izin = await Notification.requestPermission();
+        if (izin !== "granted") {
+            alert("Bildirimlere izin vermedin, bu yüzden aktif edemiyoruz.");
+            return;
+        }
+
+        const kayit = await navigator.serviceWorker.register("/static/sw.js");
+
+        // Eğer daha önceden (belki eski bir anahtarla) bir abonelik
+        // varsa, önce ondan çıkış yapıyoruz - aksi halde tarayıcı
+        // "farklı bir anahtarla zaten abonesin" diye hata veriyor.
+        const eskiAbonelik = await kayit.pushManager.getSubscription();
+        if (eskiAbonelik) {
+            await eskiAbonelik.unsubscribe();
+        }
+
+        const anahtarCevabi = await fetch("/vapid-public-key");
+        const { publicKey } = await anahtarCevabi.json();
+
+        const abonelik = await kayit.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(publicKey),
+        });
+
+        await fetch("/push-abone-ol", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(abonelik),
+        });
+
+        alert("Bildirimler başarıyla aktif edildi!");
+    } catch (hata) {
+        console.error(hata);
+        alert("Bir sorun oluştu, konsolu kontrol et.");
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block baslik %}Siparişlerim - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="mb-0">Siparişlerim</h3>
+    <span class="badge bg-warning fs-6">
+        <i class="bi bi-star-fill"></i> Sadakat Puanın: {{ current_kullanici.sadakat_puani }}
+    </span>
+</div>
+
+{% if current_kullanici.sadakat_puani >= 10 %}
+<div class="alert alert-success">
+    🎉 10 puana ulaştın! Bir sonraki ziyaretinde dükkanımıza uğrayıp indirim fırsatını sorabilirsin.
+</div>
+{% endif %}
+
+{% if siparisler %}
+<div class="table-responsive">
+    <table class="table table-hover shadow-sm align-middle" style="background:#fffdf9;">
+        <thead>
+            <tr>
+                <th>Ürün</th>
+                <th>Miktar</th>
+                <th>İstenilen Tarih</th>
+                <th>Not</th>
+                <th>Durum</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in siparisler %}
+            <tr>
+                <td>{{ s.urun_adi }}</td>
+                <td>{{ s.miktar }}</td>
+                <td>{{ s.istenilen_tarih }}</td>
+                <td>{{ s.not_metni or "-" }}</td>
+                <td>
+                    {% if s.durum == "Alindi" %}
+                        <span class="badge bg-secondary">Alındı</span>
+                    {% elif s.durum == "Hazirlaniyor" %}
+                        <span class="badge bg-warning">Hazırlanıyor</span>
+                    {% else %}
+                        <span class="badge bg-success">Teslim Alındı</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="text-muted">Henüz sipariş vermedin. <a href="/siparis-ver">Hemen bir tane ver!</a></p>
+{% endif %}
+
+<a href="/siparis-ver" class="btn btn-tatli mt-3">+ Yeni Sipariş Ver</a>
+{% endblock %}

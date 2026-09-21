@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block baslik %}Özel Sipariş Ver - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <h3 class="mb-2">Özel Sipariş Ver</h3>
+        <p class="text-muted mb-4">Doğum günü pastası, tepsi tatlı gibi özel gün siparişlerin için bu formu kullanabilirsin. Ödeme dükkanımızda, elden alınmaktadır.</p>
+
+        {% if hata %}
+            <div class="alert alert-danger">{{ hata }}</div>
+        {% endif %}
+
+        <form method="post" action="/siparis-ver" class="card shadow-sm card-body p-4">
+            <div class="mb-3">
+                <label class="form-label">Ürün</label>
+                <select name="urun_id" class="form-select" required>
+                    {% for urun in urunler %}
+                        <option value="{{ urun.id }}">{{ urun.isim }} ({{ urun.kategori }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Miktar / Boyut</label>
+                <input type="text" name="miktar" class="form-control" placeholder="Örn: 1 kg, 200 gr, Orta boy pasta" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">İstenilen Tarih</label>
+                <input type="date" name="istenilen_tarih" id="istenilenTarih" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Not (opsiyonel)</label>
+                <textarea name="not_metni" class="form-control" rows="3" placeholder="Örn: Üzerine 'İyi ki doğdun Ayşe' yazsın"></textarea>
+            </div>
+            <button type="submit" class="btn btn-tatli">Siparişi Gönder</button>
+        </form>
+         <script>
+    const bugun = new Date();
+    bugun.setDate(bugun.getDate() + 1);
+    const yarinStr = bugun.toISOString().split("T")[0];
+    document.getElementById("istenilenTarih").setAttribute("min", yarinStr);
+    </script>
+    </div>
+</div>
+{% endblock %}

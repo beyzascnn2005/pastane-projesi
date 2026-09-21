@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block baslik %}İletişim - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<div class="text-center mb-4">
+    <h2>Bize Ulaşın</h2>
+    <div class="divider-gold"></div>
+</div>
+
+<div class="row">
+    <!-- SOL: BİLGİLER -->
+    <div class="col-md-5 mb-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h5><i class="bi bi-geo-alt-fill text-copper"></i> Adres</h5>
+                <p class="mb-0">Ilıca/Erzurum</p>
+            </div>
+        </div>
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h5><i class="bi bi-clock-fill text-copper"></i> Çalışma Saatleri</h5>
+                <p class="mb-0">Pazartesi - Pazar: 10:00 - 00:00</p>
+            </div>
+        </div>
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h5><i class="bi bi-telephone-fill text-copper"></i> Telefon</h5>
+                <p class="mb-0">0530 370 9793</p>
+            </div>
+        </div>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5><i class="bi bi-share-fill text-copper"></i> Sosyal Medya</h5>
+                <a href="https://www.instagram.com/dondurmaciabdulkerim/" class="me-3"><i class="bi bi-instagram fs-4 text-copper"></i></a>
+                <a href="https://wa.me/905303709793"><i class="bi bi-whatsapp fs-4 text-copper"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAĞ: HARİTA + FORM -->
+    <div class="col-md-7">
+        <!-- Google Maps embed - [KONUM] yazan yeri kendi dükkan
+             adresinle değiştireceksin (Google Maps'te adresi ara,
+             Paylaş > Harita Yerleştir'den bu kodu alabilirsin) -->
+        <div class="ratio ratio-16x9 mb-4 shadow-sm rounded overflow-hidden">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1358338.5345161385!2d40.31159317509206!3d40.21745253062229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406e5700f2e585b5%3A0xb8ef4f972fa5df9f!2sDondurmac%C4%B1%20Abd%C3%BClkerim!5e0!3m2!1str!2str!4v1789073904456!5m2!1str!2str"
+                style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="mb-3">Mesaj Gönder</h5>
+
+                {% if mesaj_gonderildi %}
+                    <div class="alert alert-success">Mesajınız iletildi, teşekkürler!</div>
+                {% endif %}
+
+                <form method="post" action="/iletisim">
+                    <div class="mb-3">
+                        <label class="form-label">Ad Soyad</label>
+                        <input type="text" name="ad_soyad" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">E-posta</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mesajınız</label>
+                        <textarea name="mesaj" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-tatli">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

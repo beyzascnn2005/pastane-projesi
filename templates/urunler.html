@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block baslik %}Ürünlerimiz - Dondurmacı Abdülkerim{% endblock %}
+
+{% block icerik %}
+<div class="text-center mb-4">
+    <h2>Ürünlerimiz</h2>
+    <div class="divider-gold"></div>
+</div>
+
+<!-- KATEGORİ FİLTRELEME BUTONLARI -->
+<div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+    <a href="/urunler-sayfasi" class="btn btn-outline-secondary {% if not secili_kategori %}active{% endif %}">Tümü</a>
+    {% for kategori in kategoriler %}
+        <a href="/urunler-sayfasi?kategori={{ kategori }}"
+           class="btn btn-outline-secondary {% if secili_kategori == kategori %}active{% endif %}">
+            {{ kategori }}
+        </a>
+    {% endfor %}
+</div>
+
+<!-- ÜRÜN KARTLARI -->
+{% if urunler %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for urun in urunler %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            {% if urun.fotograf_url %}
+                <img src="{{ urun.fotograf_url }}" class="card-img-top" alt="{{ urun.isim }}" style="height:500px;object-fit:cover;">
+            {% else %}
+                <div class="bg-cream-alt d-flex align-items-center justify-content-center" style="height:200px;">
+                    <i class="bi bi-cake2" style="font-size:3rem;color:var(--gold);"></i>
+                </div>
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+                <span class="badge bg-secondary mb-2" style="width:fit-content;">{{ urun.kategori }}</span>
+                <h5 class="card-title">{{ urun.isim }}</h5>
+                <p class="card-text text-muted small">{{ urun.aciklama or "" }}</p>
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <strong class="text-copper">{{ "%.2f"|format(urun.fiyat) }} TL</strong>
+                    {% if not urun.stokta_var %}
+                        <span class="badge bg-danger">Stokta Yok</span>
+                    {% endif %}
+                </div>
+                <a href="/urun-detay/{{ urun.id }}" class="btn btn-tatli btn-sm mt-3">Detay / Yorumlar</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-center text-muted">Bu kategoride henüz ürün bulunmuyor.</p>
+{% endif %}
+{% endblock %}
