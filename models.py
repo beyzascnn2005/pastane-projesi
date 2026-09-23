@@ -1,12 +1,6 @@
 """
 models.py - Veritabanı tablolarımızın tanımı.
 
-Kotlin'deki FinansalIslem.kt (Entity) dosyasının karşılığı gibi düşün.
-Her class burada bir veritabanı tablosuna karşılık gelir.
-
-Şimdilik sadece Kullanici tablosunu yapıyoruz. İlerleyen adımlarda
-Urun, Yorum, Begeni tablolarını da buraya ekleyeceğiz - ve bunlar
-Kullanici'ya "bağlı" (foreign key ile) olacak.
 """
 
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, Float, ForeignKey, UniqueConstraint

@@ -3,11 +3,7 @@ schemas.py - API'ye giren ve çıkan verinin "şeklini" tanımlar.
 
 models.py'daki Kullanici sınıfı VERİTABANI tablosunu tanımlıyordu.
 Buradaki şemalar ise API isteklerinde/cevaplarında hangi alanların
-görüneceğini tanımlıyor. Neden ayrı tutuyoruz?
-
-Çünkü örneğin kayıt olurken kullanıcıdan şifre alıyoruz (KullaniciOlustur),
-ama cevap olarak asla şifre_hash'i geri döndürmek istemiyoruz
-(KullaniciCevap) - bu bir güvenlik pratiği.
+görüneceğini tanımlıyor. 
 """
 
 from pydantic import BaseModel, EmailStr, Field

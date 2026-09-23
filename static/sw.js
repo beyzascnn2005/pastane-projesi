@@ -1,8 +1,5 @@
 // sw.js - Service Worker
-//
-// Bu dosya, tarayıcının ARKA PLANDA (site kapalıyken bile) çalışan
-// özel bir script'i. Görevi tek: sunucudan bir push bildirimi
-// geldiğinde, bunu telefonun bildirim çubuğunda göstermek.
+
 
 self.addEventListener("push", function (event) {
     let baslik = "Pastane";

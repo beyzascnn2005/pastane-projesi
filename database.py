@@ -1,12 +1,8 @@
 """
 database.py - Veritabanı bağlantı ayarları.
 
-Kotlin'deki AppDatabase.kt dosyasının Python karşılığı gibi düşün.
-Orada Room + SQLite kullanıyordun, burada SQLAlchemy + SQLite kullanıyoruz.
+burada SQLAlchemy + SQLite kullanıyoruz.
 
-SQLite: tek bir dosyada duran, kurulum gerektirmeyen basit bir veritabanı.
-Küçük/orta projeler ve öğrenme için ideal. İleride istersen PostgreSQL'e
-geçiş yapmak da kolay olacak (sadece bu dosyayı değiştirmek yeterli).
 """
 
 from sqlalchemy import create_engine

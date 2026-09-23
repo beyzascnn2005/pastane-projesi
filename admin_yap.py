@@ -4,8 +4,6 @@ admin_yap.py - Bir kullanıcıyı elle admin yapmak için tek seferlik araç.
 Kullanımı: terminalde (venv aktifken) şunu çalıştır:
     python admin_yap.py test4@example.com
 
-İleride gerçek bir admin paneli kurunca buna gerek kalmayacak,
-ama başlangıçta "ilk admini" oluşturmak için pratik bir yöntem.
 """
 
 import sys

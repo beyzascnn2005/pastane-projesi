@@ -1,11 +1,7 @@
 """
 crud.py - Veritabanıyla konuşan fonksiyonlar.
 
-Kotlin'deki FinansalIslemDao.kt (DAO) dosyasının karşılığı.
-"CRUD" = Create, Read, Update, Delete kısaltması.
 
-main.py bu fonksiyonları çağıracak, kendisi doğrudan veritabanı
-sorgusu yazmayacak. Bu ayrım, kodu düzenli ve test edilebilir tutar.
 """
 
 from sqlalchemy.orm import Session
