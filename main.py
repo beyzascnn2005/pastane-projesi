@@ -7,7 +7,8 @@ Bu dosya artık:
 """
 
 from fastapi import FastAPI, Depends, HTTPException, Request, Form
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, Response
+from urllib.parse import quote
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import date
 from fastapi.templating import Jinja2Templates
@@ -179,6 +180,45 @@ def site_begen_veya_kaldir(
 def api_durum():
     return {"mesaj": "Pastane projesi backend'i çalışıyor."}
 
+SITE_URL = os.getenv("SITE_URL", "https://dondurmaciabdulkerim.onrender.com").rstrip("/")
+
+
+@app.get("/robots.txt", include_in_schema=False)
+def robots_txt():
+    icerik = (
+        "User-agent: *\n"
+        "Disallow: /admin\n"
+        "Disallow: /giris-sayfasi\n"
+        "Disallow: /kayit-sayfasi\n"
+        "Disallow: /siparis-ver\n"
+        "Disallow: /siparislerim\n"
+        "Disallow: /favorilerim\n"
+        "Disallow: /cikis\n"
+        "\n"
+        f"Sitemap: {SITE_URL}/sitemap.xml\n"
+    )
+    return Response(content=icerik, media_type="text/plain")
+
+
+@app.get("/sitemap.xml", include_in_schema=False)
+def sitemap_xml(db: Session = Depends(get_db)):
+    adresler = [
+        f"{SITE_URL}/",
+        f"{SITE_URL}/urunler-sayfasi",
+        f"{SITE_URL}/iletisim",
+    ]
+    for kategori in KATEGORILER:
+        adresler.append(f"{SITE_URL}/urunler-sayfasi?kategori={quote(kategori)}")
+    for urun in crud.tum_urunleri_getir(db):
+        adresler.append(f"{SITE_URL}/urun-detay/{urun.id}")
+
+    satirlar = "".join(f"<url><loc>{a}</loc></url>" for a in adresler)
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+        f"{satirlar}</urlset>"
+    )
+    return Response(content=xml, media_type="application/xml")
 
 # --- KAYIT (REGISTER) ENDPOINT ---
 #

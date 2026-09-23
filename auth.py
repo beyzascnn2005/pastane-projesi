@@ -1,16 +1,6 @@
 """
 auth.py - Giriş sonrası verilen "token" (kimlik kartı) mantığı.
 
-Nasıl çalışır (kısaca):
-1. Kullanıcı email+şifre ile /giris'e istek atar
-2. Şifre doğruysa, ona süresi olan bir JWT token üretip veririz
-3. Kullanıcı bundan sonraki her istekte bu token'ı gösterir
-   (Authorization header'ında "Bearer <token>" şeklinde)
-4. Biz de token'ı çözüp "bu gerçekten giriş yapmış biri mi" diye kontrol ederiz
-
-Bunu neden yapıyoruz, şifreyi her seferinde göndermek yerine?
-Çünkü şifreyi her istekte taşımak güvensiz ve pratik değil. Token'ın
-süresi var, çalınsa bile sınırlı süre geçerli, ve iptal edilebilir.
 """
 
 from datetime import datetime, timedelta
