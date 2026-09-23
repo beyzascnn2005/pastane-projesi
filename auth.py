@@ -25,7 +25,10 @@ import crud
 # GERÇEK BİR PROJEDE bu anahtar asla kod içinde açık yazılmaz,
 # ortam değişkeni (.env dosyası) ile saklanır. Şimdilik öğrenme
 # amaçlı burada tutuyoruz, ileride .env'e taşıyacağız.
-GIZLI_ANAHTAR = "bu-anahtari-daha-sonra-env-dosyasina-tasiyacagiz-simdilik-boyle-kalsin"
+import os
+GIZLI_ANAHTAR = os.getenv("SECRET_KEY")
+if not GIZLI_ANAHTAR:
+    raise RuntimeError("SECRET_KEY ortam değişkeni tanımlı değil")
 ALGORITMA = "HS256"
 TOKEN_GECERLILIK_DAKIKA = 60 * 24  # 1 gün
 

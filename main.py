@@ -702,16 +702,17 @@ def siparis_ver_formu_isle(
     )
     crud.siparis_olustur(db, su_anki_kullanici.id, siparis_verisi)
 
-    # Yeni sipariş geldi - kayıtlı adminlere push bildirimi gönderiyoruz.
-    crud.push_bildirimi_gonder(
-        db,
-        baslik="Yeni Sipariş!",
-        govde=f"{su_anki_kullanici.ad_soyad}, {urun.isim} ({miktar}) siparişi verdi.",
-    )
+        # Yeni sipariş geldi - kayıtlı adminlere push bildirimi gönderiyoruz.
+    try:
+        crud.push_bildirimi_gonder(
+            db,
+            baslik="Yeni Sipariş!",
+            govde=f"{su_anki_kullanici.ad_soyad}, {urun.isim} ({miktar}) siparişi verdi.",
+        )
+    except Exception as e:
+        print(f"[PUSH] Bildirim gönderilemedi: {e}")
 
     return RedirectResponse(url="/siparislerim", status_code=303)
-
-
 @app.get("/siparislerim")
 def siparislerim_sayfasi(
     request: Request,

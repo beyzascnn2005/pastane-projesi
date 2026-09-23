@@ -283,8 +283,8 @@ def push_bildirimi_gonder(db: Session, baslik: str, govde: str):
                 vapid_claims={"sub": config.VAPID_CLAIM_EMAIL},
             )
             print("[PUSH DEBUG] Bildirim başarıyla gönderildi.")
-        except WebPushException as e:
-            print(f"[PUSH DEBUG] HATA: {e}")
+        except Exception as e:
+            print(f"[PUSH DEBUG] HATA (tip: {type(e).__name__}): {e}")
             if hasattr(e, "response") and e.response is not None:
                 print(f"[PUSH DEBUG] Response status: {e.response.status_code}")
                 print(f"[PUSH DEBUG] Response body: {e.response.text}")
